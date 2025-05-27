@@ -53,9 +53,6 @@ savefig(figExpEEGSim, [figFolder 'Fig_expEEGSimulation'])
 savefig(figExpEEGSubjParamVar, [figFolder 'Fig_expEEGSimulation_SubjVar'])
 
 
-%% Phase differences (wave spatial frequency):
-
-
 %% Temp Frequency Spectra:
 rng(rand_seed)
 freqSpecFig = pvn_freqSpectra();
