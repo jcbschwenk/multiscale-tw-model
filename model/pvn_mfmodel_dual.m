@@ -7,7 +7,7 @@ if ~nargin
 end
 
 if nargin < 2
-    name = ['PVN-' gpa.genRandCode(8)];
+    name = ['PVN-' genRandCode(8)];
 end
 
 %% ARCHITECTURE:
@@ -41,4 +41,15 @@ end
 %%
 g.name = name;
 
+end
+%%
+function out = genRandCode(len, seed)
+
+if nargin > 1
+    rnd(seed);
+end
+
+symbols = ['a':'z' '0':'9'];
+nums = randi(numel(symbols),[1 len]);
+out = symbols (nums);
 end
