@@ -1,4 +1,11 @@
 function out = pvn_eegProject(in, g, param, src_areas)
+% get the EEG projection of source-level activity.
+% input is: 
+% in - output of mean-field model
+% g - graph object
+% param - parameter struct
+% src_areas - (optional) cell-array, list of source area labels 
+% (use if more sources are added in pvn_param and projection should be performed to only a subset of them)
 
 isdual = any(contains(param.NodeLabels, '_R')); % dual hemisphere model, i.e. we have independent sources for each side
 
@@ -16,7 +23,12 @@ assert(param.N < 8, 'Automatic area assignment assumes single digit labels.')
 whichArea = cellfun(@(x) str2double(x(end)), g.Labels);  % get area index for each node
 
 inclIdx = whichArea >= 1 & whichArea <= param.N; % exclude input-layers
-inclIdx = find(inclIdx & ~contains(g.Labels, 'Pul')); % exclude Pulvinar
+inclIdx = inclIdx & ~contains(g.Labels, 'Pul'); % exclude Pulvinar
+if param.eeg.excludeL4
+    inclIdx = find(inclIdx & ~contains(g.Labels, 'L4')); % exclude Layer 4 
+else
+    inclIdx = find(inclIdx);
+end
 if isdual
     whichHemi = contains(g.Labels, '_R');
     srcPos = srcPos(whichArea(inclIdx)+whichHemi(inclIdx).*size(srcPos,1)/2, :); % repmat source positions

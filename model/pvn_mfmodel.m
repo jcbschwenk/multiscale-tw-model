@@ -1,6 +1,11 @@
 function [g, param, stim, prior] = pvn_mfmodel(param)
-
-% laminar model with internal alpha generators in L5/6
+% main function to create the model
+% input param is the parameter struct defined by pvn_param()
+% output variables:
+% g - graph object
+% param - parameter struct
+% stim - stimulus object
+% prior - prior object (legacy name, used in the paper only as continuous top-down input to IGIB nodes)
 
 if ~nargin
     param = pvn_param();

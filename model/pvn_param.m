@@ -1,6 +1,11 @@
-function param = pvn_param()
+function param = pvn_param(N)
 % generate param struct for the model
-param.N = 3;
+
+if ~nargin
+    N = 3;
+end
+
+param.N = N;
 param.Areas = 0:param.N+1;
 param.fiCurve = @pvn_mfFICurve;
 param.spkIConv = @(I) 4.*I;
@@ -10,9 +15,9 @@ param.NodeLabels = {...
     'ILSt', 'ILPr',... % Input layers: stimulus and prior
     'ILStIN', 'ILPrIN',...
     'L4X', 'L4IN',... % Layer 4
-    'SGX', 'SGIN', 'SGE',... % Supragranular
+    'SGX', 'SGIN',... % Supragranular
     'IGX', 'IGIN',... % Infragranular
-    'Pul', 'PulIN'}; % Pulvinar
+    'Pul'}; % Pulvinar
 
 param.Nodes = fxNode.empty;
 
@@ -63,7 +68,6 @@ for iType = 1:numel(param.NodeLabels)
    nodeInArea{iType} = 1:param.N;
 end
 
-nodeInArea(strcmpi(param.NodeLabels, 'SGE')) = {1:param.N-1};
 nodeInArea(strcmpi(param.NodeLabels, 'SGIN')) = {1:param.N-1};
 
 nodeInArea(strcmpi(param.NodeLabels, 'Pul')) = {1:param.N};
@@ -101,6 +105,9 @@ eeg.bpFilt = bpFilt;
 
 eeg.isfw = @(x) abs(x+pi/2) < 0.5; % determine fw state from fitted wavDir
 eeg.isbw = @(x) abs(x-pi/2) < 0.5; % 
+
+eeg.excludeL4 = false; % whether to exclude L4 (X and IN) from the EEG projection
+% (Pul and Input Layers are always excluded)
 
 param.eeg = eeg;
 

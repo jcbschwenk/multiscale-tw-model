@@ -1,5 +1,8 @@
 function [stim, prior, isOnStim, isOnPrior] = pvn_defaultStim(type, nTr, stim, prior)
-% defines default stimulation parameters
+% defines and sets default stimulation parameters
+% (most settings used for exploration only, 'dcPulse_wnPrior' is standard configuration)
+% returns updated stim and prior objects given as input, nTr is number
+% of trials 
 
 isdual = numel(stim) > 1 && numel(prior) > 1;
 
@@ -157,7 +160,7 @@ function [dur, isOnStim, isOnPrior, stimScale, priorScale, preDur] = dcPulseDef(
 dur = 2e3;
 isOnStim = {[0 1e3]};
 isOnPrior = {[-Inf Inf]};
-stimScale = 1;
+stimScale = 1.2;
 priorScale = 0.3;
 preDur = 2e3;
 end

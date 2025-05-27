@@ -1,4 +1,8 @@
 function [g, param, stim, prior] = pvn_addExtCurr(g, param, varargin)
+% add external current (stim/prior) to the network
+% inputs are g: graph object; param: parameter struct; 
+% optional arguments are: 'Stim': Stimulus object, 'Prior': Prior object
+
 
 isdual = any(contains(param.NodeLabels, '_R'));
 

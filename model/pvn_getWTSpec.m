@@ -1,4 +1,9 @@
 function out = pvn_getWTSpec(in, g, varargin)
+% returns average wavelet spectra for meanfield input
+% input is:
+% in - meanfield output
+% g - graph object
+% for optional args see inputParser def
 
 p = inputParser();
 p.addParameter('TimeWindow', [-Inf Inf]);

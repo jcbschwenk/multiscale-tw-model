@@ -1,5 +1,5 @@
 function out = pvn_figCols(req)
-% defines standard colors for different conditions between figures
+% defines standard colors for different conditions/areas between figures
 
 
 out.fw = [0.2 0.2 0.7];

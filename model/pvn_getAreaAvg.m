@@ -1,6 +1,11 @@
 function out = pvn_getAreaAvg(mf, g, param, flag)
 % returns averages of all local activity in each area.
 % Cx and Pulvinar are treated separately.
+% input is:
+% mf - output of meanfield model
+% g - graph object
+% param - parameter struct
+% flag - (optional) can be 'Cx' or 'Pul' to return only Cx or Pul
 
 if nargin < 4
    flag = ''; 

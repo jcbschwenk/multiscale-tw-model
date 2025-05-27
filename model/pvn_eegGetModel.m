@@ -1,5 +1,7 @@
 function eeg = pvn_eegGetModel(eeg)
 % Get forward projection of mean-field output as cortical dipoles to EEG.
+% input eeg is set as subfiled of parameter struct in pvn_param()
+
 
 %% parse area input:
 srcPos = cat(1, eeg.source_pos{:});

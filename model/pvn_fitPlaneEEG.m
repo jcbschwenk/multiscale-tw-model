@@ -340,7 +340,7 @@ function [fw, bw] = classifyDirection(wavDir, winSize, useMedian)
 if useMedian
     % mirror along the M-L axis to get a shared histogram: (this assumes
     % that there is a single axis of propagation, that is closer to the A-P
-    % axis! That's true for the model, but possibly not for real data...)
+    % axis! That's true for the model, but probably not for real data...)
     
     wdDist = [wavDir(wavDir > 0); pi-abs(wavDir(wavDir < 0))];
     
